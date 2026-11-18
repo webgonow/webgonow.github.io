@@ -17,7 +17,6 @@
       --text-primary: #1c2026;
       --text-secondary: #64748b;
       --accent: #00b87c;
-      --accent-soft: #94a3b8;
       --border: #e2e8f0;
     }
 
@@ -33,7 +32,7 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at 50% 38%, rgba(0, 184, 124, 0.06) 0%, rgba(255, 255, 255, 1) 65%);
+      background: #fbfefc;
       color: var(--text-primary);
       display: flex;
       flex-direction: column;
@@ -45,11 +44,36 @@
       overflow-x: hidden;
     }
 
+    /* Big Material-style shapes drifting around the screen edges */
+    #shapes {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #shapes .shape {
+      position: absolute;
+      will-change: transform;
+    }
+
+    #shapes svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
     .spacer {
       height: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
 
     main {
+      position: relative;
+      z-index: 1;
       max-width: 480px;
       width: 100%;
       display: flex;
@@ -58,97 +82,20 @@
       animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    .logo {
-      width: clamp(190px, 58vw, 250px);
-      height: auto;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Large, expressive 3-gear Google-inspired mechanical loader */
-    .gear-stage {
-      position: relative;
-      width: 156px;
-      height: 118px;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: stageFloat 4s ease-in-out infinite;
-    }
-
-    .gear-glow {
+    /* soft white halo keeps text readable when a shape drifts behind it */
+    main::before {
+      content: "";
       position: absolute;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 184, 124, 0.22) 0%, rgba(0, 184, 124, 0) 72%);
-      animation: pulseGlow 3.2s ease-in-out infinite;
+      inset: -2rem -1.5rem;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, rgba(251, 254, 252, 0.92) 0%, rgba(251, 254, 252, 0.7) 55%, rgba(251, 254, 252, 0) 100%);
       pointer-events: none;
     }
 
-    .gear {
-      position: absolute;
-      transform-origin: center center;
-      will-change: transform;
-      filter: drop-shadow(0 6px 14px rgba(28, 32, 38, 0.08));
-    }
-
-    /* Main large emerald gear */
-    .gear-1 {
-      width: 66px;
-      height: 66px;
-      top: 10px;
-      left: 20px;
-      color: var(--accent);
-      animation: spinCW 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
-    }
-
-    /* Interlocking dark charcoal gear */
-    .gear-2 {
-      width: 48px;
-      height: 48px;
-      top: 44px;
-      right: 24px;
-      color: var(--text-primary);
-      animation: spinCCW 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
-    }
-
-    /* Third micro accent gear */
-    .gear-3 {
-      width: 34px;
-      height: 34px;
-      bottom: 8px;
-      left: 54px;
-      color: var(--accent-soft);
-      animation: spinCWOffset 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
-    }
-
-    @keyframes spinCW {
-      0% { transform: rotate(0deg); }
-      45% { transform: rotate(210deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes spinCCW {
-      0% { transform: rotate(18deg); }
-      45% { transform: rotate(-192deg); }
-      100% { transform: rotate(-342deg); }
-    }
-
-    @keyframes spinCWOffset {
-      0% { transform: rotate(-12deg); }
-      45% { transform: rotate(198deg); }
-      100% { transform: rotate(348deg); }
-    }
-
-    @keyframes stageFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(0.92); opacity: 0.7; }
-      50% { transform: scale(1.18); opacity: 1; }
+    .logo {
+      width: clamp(190px, 58vw, 250px);
+      height: auto;
+      margin-bottom: 1.75rem;
     }
 
     h1 {
@@ -198,25 +145,28 @@
       box-shadow: 0 8px 20px rgba(0, 184, 124, 0.12);
     }
 
+    .contact-link:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     footer {
+      position: relative;
+      z-index: 1;
       font-size: 0.78rem;
-      color: #94a3b8;
+      color: #64748b;
       padding-top: 1.5rem;
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+  <div id="shapes" aria-hidden="true"></div>
+
   <div class="spacer"></div>
 
   <main>
@@ -225,26 +175,6 @@
       alt="WebGoNow Greece Logo"
       class="logo"
     />
-
-    <!-- Expressive 3-Gear Loading Animation -->
-    <div class="gear-stage" aria-label="Building in progress">
-      <div class="gear-glow"></div>
-
-      <!-- Primary Emerald Gear -->
-      <svg class="gear gear-1" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-      </svg>
-
-      <!-- Secondary Charcoal Gear -->
-      <svg class="gear gear-2" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-      </svg>
-
-      <!-- Third Micro Accent Gear -->
-      <svg class="gear gear-3" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-      </svg>
-    </div>
 
     <h1>Something new is on the way.</h1>
 
@@ -261,5 +191,83 @@
   <footer>
     &copy; 2026 WebGoNow Greece. All rights reserved.
   </footer>
+
+  <script>
+    /*
+      Material 3 Expressive style shapes: a scalloped / flower outline
+      r(θ) = (1 + a·cos(n·θ)) / (1 + a)
+      n = number of lobes, a = how deep the lobes are.
+      Each shape morphs its depth "a" over time, rotates, and drifts
+      up/down and/or left/right across the screen edges.
+      ax / ay = drift distance in vmax units.
+    */
+    var SHAPES = [
+      // top-left: big emerald cookie, drifts left/right
+      { color: '#00b87c', n: 9,  a0: 0.03, a1: 0.10, size: 64, left: -24, top: -24, ax: 12, ay: 0,  v: 0.30, m: 0.60, rot: 6,   p: 0.0, op: 1 },
+      // top-right: mint flower, drifts up/down
+      { color: '#c4f1de', n: 6,  a0: 0.10, a1: 0.30, size: 56, right: -20, top: -20, ax: 0,  ay: 12, v: 0.26, m: 0.50, rot: -5,  p: 1.7, op: 1 },
+      // bottom-left: butter clover, drifts up/down
+      { color: '#ffe48a', n: 4,  a0: 0.12, a1: 0.30, size: 50, left: -20, bottom: -22, ax: 0,  ay: -13, v: 0.28, m: 0.70, rot: 7,   p: 3.1, op: 1 },
+      // bottom-right: sky burst, drifts left/right
+      { color: '#b9e3ff', n: 12, a0: 0.04, a1: 0.12, size: 46, right: -16, bottom: -18, ax: -12, ay: 0,  v: 0.24, m: 0.55, rot: -8,  p: 2.2, op: 1 },
+      // left edge: small charcoal scallop, drifts up/down
+      { color: '#1c2026', n: 7,  a0: 0.05, a1: 0.16, size: 26, left: -14, top: '40%', ax: 0,  ay: 14, v: 0.34, m: 0.80, rot: 10,  p: 0.9, op: 1 },
+      // right edge: emerald-soft sunny, drifts in a loop
+      { color: '#6fddb4', n: 8,  a0: 0.06, a1: 0.22, size: 30, right: -15, top: '50%', ax: -9, ay: 9,  v: 0.30, m: 0.65, rot: -9,  p: 4.0, op: 1 },
+      // top edge: small butter pill-ish oval, drifts left/right
+      { color: '#ffe48a', n: 2,  a0: 0.10, a1: 0.26, size: 22, left: '46%', top: -12, ax: 16, ay: 0,  v: 0.22, m: 0.40, rot: 12,  p: 5.0, op: 1 },
+      // bottom edge: small mint cookie, drifts left/right
+      { color: '#9fe8c9', n: 10, a0: 0.03, a1: 0.09, size: 24, left: '28%', bottom: -14, ax: -15, ay: 0, v: 0.25, m: 0.50, rot: -10, p: 2.8, op: 1 }
+    ];
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var host = document.getElementById('shapes');
+
+    function outline(n, a) {
+      var d = '', steps = 180;
+      for (var i = 0; i <= steps; i++) {
+        var t = i / steps * Math.PI * 2;
+        var r = (1 + a * Math.cos(n * t)) / (1 + a);
+        d += (i ? 'L' : 'M') + (Math.cos(t) * r).toFixed(3) + ' ' + (Math.sin(t) * r).toFixed(3);
+      }
+      return d + 'Z';
+    }
+
+    SHAPES.forEach(function (s) {
+      var el = document.createElement('div');
+      el.className = 'shape';
+      el.style.width = el.style.height = s.size + 'vmax';
+      ['left', 'right', 'top', 'bottom'].forEach(function (k) {
+        if (s[k] !== undefined) el.style[k] = typeof s[k] === 'number' ? s[k] + 'vmax' : s[k];
+      });
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '-1 -1 2 2');
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('fill', s.color);
+      path.setAttribute('opacity', s.op);
+      svg.appendChild(path);
+      el.appendChild(svg);
+      host.appendChild(el);
+      s.el = el;
+      s.path = path;
+    });
+
+    function frame(ms) {
+      var t = ms / 1000;
+      var u = Math.max(window.innerWidth, window.innerHeight) / 100;
+      SHAPES.forEach(function (s) {
+        var morph = 0.5 + 0.5 * Math.sin(t * s.m + s.p);
+        s.path.setAttribute('d', outline(s.n, s.a0 + (s.a1 - s.a0) * morph));
+        var dx = s.ax * Math.sin(t * s.v + s.p) * u;
+        var dy = s.ay * Math.sin(t * s.v + s.p + (s.ax && s.ay ? 1.57 : 0)) * u;
+        var rot = s.rot * t;
+        s.el.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg)';
+      });
+      if (!reduce) requestAnimationFrame(frame);
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(frame);
+  </script>
 </body>
 </html>
