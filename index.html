@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>WebGoNow Greece — Coming Soon</title>
   <meta name="description" content="WebGoNow Greece — Digital solutions, web development & SaaS. Launching soon." />
 
@@ -17,6 +17,7 @@
       --text-primary: #1c2026;
       --text-secondary: #64748b;
       --accent: #00b87c;
+      --accent-soft: #94a3b8;
       --border: #e2e8f0;
     }
 
@@ -27,24 +28,25 @@
     }
 
     html, body {
-      height: 100%;
+      min-height: 100dvh;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
+      background: radial-gradient(circle at 50% 38%, rgba(0, 184, 124, 0.06) 0%, rgba(255, 255, 255, 1) 65%);
       color: var(--text-primary);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       text-align: center;
-      padding: 2.5rem 1.5rem;
+      padding: max(1.5rem, env(safe-area-inset-top)) 1.25rem max(1.5rem, env(safe-area-inset-bottom));
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     .spacer {
-      height: 1rem;
+      height: 0.5rem;
     }
 
     main {
@@ -53,113 +55,159 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: fadeUp 0.7s ease-out both;
+      animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .logo {
-      width: 240px;
-      max-width: 75%;
+      width: clamp(190px, 58vw, 250px);
       height: auto;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Google-style interlocking gear loader */
-    .gear-loader {
+    /* Large, expressive 3-gear Google-inspired mechanical loader */
+    .gear-stage {
       position: relative;
-      width: 64px;
-      height: 44px;
-      margin-bottom: 1.75rem;
+      width: 156px;
+      height: 118px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: stageFloat 4s ease-in-out infinite;
     }
 
-    .gear-primary {
+    .gear-glow {
       position: absolute;
-      top: 0;
-      left: 6px;
-      width: 32px;
-      height: 32px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 184, 124, 0.22) 0%, rgba(0, 184, 124, 0) 72%);
+      animation: pulseGlow 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .gear {
+      position: absolute;
+      transform-origin: center center;
+      will-change: transform;
+      filter: drop-shadow(0 6px 14px rgba(28, 32, 38, 0.08));
+    }
+
+    /* Main large emerald gear */
+    .gear-1 {
+      width: 66px;
+      height: 66px;
+      top: 10px;
+      left: 20px;
       color: var(--accent);
-      animation: spinClockwise 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: spinCW 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
     }
 
-    .gear-secondary {
-      position: absolute;
-      bottom: 0;
-      right: 8px;
-      width: 22px;
-      height: 22px;
+    /* Interlocking dark charcoal gear */
+    .gear-2 {
+      width: 48px;
+      height: 48px;
+      top: 44px;
+      right: 24px;
       color: var(--text-primary);
-      animation: spinCounterClockwise 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: spinCCW 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
     }
 
-    @keyframes spinClockwise {
-      0% {
-        transform: rotate(0deg);
-      }
-      50% {
-        transform: rotate(180deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+    /* Third micro accent gear */
+    .gear-3 {
+      width: 34px;
+      height: 34px;
+      bottom: 8px;
+      left: 54px;
+      color: var(--accent-soft);
+      animation: spinCWOffset 4.2s cubic-bezier(0.45, 0.05, 0.2, 0.95) infinite;
     }
 
-    @keyframes spinCounterClockwise {
-      0% {
-        transform: rotate(15deg);
-      }
-      50% {
-        transform: rotate(-165deg);
-      }
-      100% {
-        transform: rotate(-345deg);
-      }
+    @keyframes spinCW {
+      0% { transform: rotate(0deg); }
+      45% { transform: rotate(210deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinCCW {
+      0% { transform: rotate(18deg); }
+      45% { transform: rotate(-192deg); }
+      100% { transform: rotate(-342deg); }
+    }
+
+    @keyframes spinCWOffset {
+      0% { transform: rotate(-12deg); }
+      45% { transform: rotate(198deg); }
+      100% { transform: rotate(348deg); }
+    }
+
+    @keyframes stageFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(0.92); opacity: 0.7; }
+      50% { transform: scale(1.18); opacity: 1; }
     }
 
     h1 {
-      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      font-size: clamp(1.6rem, 6.2vw, 2.3rem);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.2;
-      margin-bottom: 0.9rem;
+      line-height: 1.18;
+      margin-bottom: 0.85rem;
+      padding: 0 0.25rem;
     }
 
     p {
-      font-size: 1rem;
+      font-size: clamp(0.95rem, 3.8vw, 1.05rem);
       font-weight: 400;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 2rem;
+      margin-bottom: 1.85rem;
+      max-width: 390px;
     }
 
     .contact-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      gap: 0.55rem;
       text-decoration: none;
-      font-size: 0.925rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-primary);
-      padding: 0.75rem 1.4rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      background: #ffffff;
+      padding: 0.85rem 1.5rem;
+      min-height: 48px;
+      width: 100%;
+      max-width: 310px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      transition: all 0.22s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .contact-link:hover {
+    .contact-link:hover,
+    .contact-link:active {
       border-color: var(--accent);
       color: var(--accent);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 184, 124, 0.12);
     }
 
     footer {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #94a3b8;
+      padding-top: 1.5rem;
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(14px);
       }
       to {
         opacity: 1;
@@ -178,15 +226,22 @@
       class="logo"
     />
 
-    <!-- Google-like Gear Loading Animation -->
-    <div class="gear-loader" aria-label="Building in progress">
-      <!-- Emerald Primary Gear -->
-      <svg class="gear-primary" viewBox="0 0 24 24" fill="currentColor">
+    <!-- Expressive 3-Gear Loading Animation -->
+    <div class="gear-stage" aria-label="Building in progress">
+      <div class="gear-glow"></div>
+
+      <!-- Primary Emerald Gear -->
+      <svg class="gear gear-1" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
       </svg>
 
-      <!-- Charcoal Secondary Gear -->
-      <svg class="gear-secondary" viewBox="0 0 24 24" fill="currentColor">
+      <!-- Secondary Charcoal Gear -->
+      <svg class="gear gear-2" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+      </svg>
+
+      <!-- Third Micro Accent Gear -->
+      <svg class="gear gear-3" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
       </svg>
     </div>
