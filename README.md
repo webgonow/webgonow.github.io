@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://webgonow.github.io/img/banner.svg" alt="" width="100%" />
+<img src="https://webgonow.github.io/img/banner.svg" alt="" width="100%" /> <br><br>
 
 <img src="https://webgonow.github.io/img/logo-removebg.png" alt="WebGoNow Greece Logo" width="220" />
 
