@@ -1,2 +1,2 @@
-# webgonow.github.io
-WebGoNow Greece Site - Find our products here!
+# WebGoNow Greece
+To get a new look soon...
