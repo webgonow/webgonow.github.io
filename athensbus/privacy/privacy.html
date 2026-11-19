@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Πολιτική Απορρήτου — Athens Bus</title>
+  <link rel="icon" type="image/png" href="https://webgonow.github.io/athensbus/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1d5290;
+      --soft: #eaf3fb;
+      --line: #d9e6f2;
+      --text: #1e2a3a;
+      --muted: #4b5b6e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      background: #ffffff;
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px 32px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding-bottom: 28px;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--primary);
+      padding: 3px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 5vw, 1.8rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 8px;
+    }
+
+    .updated { margin: 0; font-size: 14px; }
+
+    p, li { color: var(--muted); font-size: 15.5px; }
+    p { margin: 0 0 12px; }
+    strong { color: var(--text); font-weight: 600; }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 10px;
+    }
+
+    section {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 10px;
+    }
+
+    ul { margin: 0 0 12px; padding-left: 20px; }
+    li { margin-bottom: 10px; padding-left: 4px; }
+    li::marker { color: var(--primary); }
+
+    a { color: var(--primary); text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+    .contact-box {
+      background: var(--soft);
+      padding: 16px 18px;
+      border-radius: 12px;
+    }
+    .contact-box p:last-child { margin-bottom: 0; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 14px;
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer img { height: 18px; width: auto; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <img class="logo" src="https://webgonow.github.io/athensbus/img/logo.png" alt="Athens Bus">
+      <span class="badge">Athens Bus</span>
+      <h1>Πολιτική Απορρήτου (Privacy Policy)</h1>
+      <p class="updated"><strong>Τελευταία ενημέρωση:</strong> 18 Νοεμβρίου 2026</p>
+    </header>
+
+    <p>Η παρούσα Πολιτική Απορρήτου εξηγεί τον τρόπο με τον οποίο η εφαρμογή <strong>Athens Bus</strong> χειρίζεται τις πληροφορίες και τα δεδομένα σας κατά τη χρήση της.</p>
+
+    <section>
+      <h2>1. Συλλογή και Χρήση Δεδομένων</h2>
+      <p>Η εφαρμογή σέβεται απόλυτα την ιδιωτικότητά σας: <strong>ΔΕΝ</strong> συλλέγει, <strong>ΔΕΝ</strong> αποθηκεύει σε εξωτερικούς διακομιστές και <strong>ΔΕΝ</strong> κοινοποιεί προσωπικά σας δεδομένα σε τρίτους.</p>
+    </section>
+
+    <section>
+      <h2>2. Άδειες Συσκευής &amp; Τοποθεσία (Location Data)</h2>
+      <ul>
+        <li><strong>Πρόσβαση Τοποθεσίας (ACCESS_FINE_LOCATION &amp; ACCESS_COARSE_LOCATION):</strong> Χρησιμοποιείται αποκλειστικά και μόνο όταν βρίσκεστε στον διαδραστικό χάρτη ή στην αναζήτηση για να εντοπίσει τις πλησιέστερες στάσεις λεωφορείων γύρω σας. Τα δεδομένα τοποθεσίας επεξεργάζονται τοπικά στη συσκευή σας και δεν αποστέλλονται σε κανέναν εξωτερικό server.</li>
+        <li><strong>Υπηρεσία Παρασκηνίου (FOREGROUND_SERVICE):</strong> Χρησιμοποιείται μόνο εφόσον ενεργοποιήσετε ζωντανή παρακολούθηση άφιξης (Live Updates) για να σας ειδοποιήσει όταν το λεωφορείο πλησιάζει στη στάση σας.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Τοπική Αποθήκευση στη Συσκευή</h2>
+      <p>Οι προτιμήσεις σας (όπως η επιλογή θέματος, η γλώσσα και οι αγαπημένες σας στάσεις/γραμμές) αποθηκεύονται αποκλειστικά τοπικά στη συσκευή σας μέσω του SharedPreferences.</p>
+    </section>
+
+    <section>
+      <h2>4. Πηγές Δεδομένων Τρίτων</h2>
+      <ul>
+        <li><strong>Public Transit Telematics API:</strong> Η εφαρμογή αντλεί δημόσια δεδομένα αφίξεων, γραμμών και δρομολογίων σε πραγματικό χρόνο από το επίσημο δημόσιο API τηλεματικής (telematics.oasa.gr).</li>
+        <li><strong>Χάρτες (OpenStreetMap / Google Maps):</strong> Χρησιμοποιούνται για την απεικόνιση των πλακιδίων χάρτη (map tiles).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Επικοινωνία</h2>
+      <div class="contact-box">
+        <p>Για οποιαδήποτε απορία ή επικοινωνία σχετικά με την εφαρμογή:</p>
+        <p><strong>Δημιουργός:</strong> WebGoNow Greece<br>
+        <strong>Email:</strong> <a href="mailto:webgonowgreece@gmail.com">webgonowgreece@gmail.com</a><br>
+        <strong>Ιστοσελίδα:</strong> <a href="https://webgonow.github.io/" target="_blank" rel="noopener">https://webgonow.github.io/</a></p>
+      </div>
+    </section>
+
+    <footer>
+      <img src="https://webgonow.github.io/img/logo-removebg.png" alt="WebGoNow Greece">
+      <span>&copy; 2026 WebGoNow Greece</span>
+    </footer>
+
+  </div>
+</body>
+</html>
